@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="document-with-QR-test-suite" verbose="1" >
+    <test name="document-with-QR-test"   >
+        <classes>
+            <class name="com.upf.etic.documentwithqr.DocumentWithQrApplicationTests" />
+
+            <!--<class name="com.upf.etic.documentwithqr.controller.DocumentWithQRcontrollerIT" />-->
+            <class name="com.upf.etic.documentwithqr.controller.DocumentWithQRcontrollerTest" />
+            <class name="com.upf.etic.documentwithqr.controller.VersionControllerTest" />
+            <!--<class name="com.upf.etic.documentwithqr.controller.ViewsControllerIT" />-->
+            <class name="com.upf.etic.documentwithqr.controller.ViewsControllerTest" />
+
+            <class name="com.upf.etic.documentwithqr.model.ImageDimensionTest" />
+            <class name="com.upf.etic.documentwithqr.model.VersionTest" />
+
+            <class name="com.upf.etic.documentwithqr.service.VersionServiceImplTest" />
+        </classes>
+    </test>
+</suite>
