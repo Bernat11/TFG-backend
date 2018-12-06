@@ -13,7 +13,6 @@ import com.upf.etic.documentwithqr.service.StorageService;
 import org.apache.maven.surefire.shade.org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +30,8 @@ public class QRgeneratorServiceImpl implements QRgeneratorService {
 
     Logger logger = LoggerFactory.getLogger(QRgeneratorServiceImpl.class);
 
-    @Autowired
-    private StorageService storageService;
-
     public ByteArrayResource generateQRcode(URL url, ImageDimension imageDimension) throws QRcodeGenerationException, StorageServiceException {
+        StorageService storageService = new StorageServiceImpl();
         storageService.createTemporaryFolderIfNotExists();
         String tmpdir = TEMPORARY_DIRECTORY + "QR.png";
         logger.info("QR destination directory set to: {}", tmpdir);
@@ -55,6 +52,7 @@ public class QRgeneratorServiceImpl implements QRgeneratorService {
         } catch (IOException e){
             throw new QRcodeGenerationException("There was an error during QR code generation");
         } finally {
+            //TODO el delete temporary deberia ir en el interceptor porque si falla en el primer try no se borra
             storageService.deleteTemporaryFolderIfExists();
         }
     }

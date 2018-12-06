@@ -36,6 +36,7 @@ public class StorageServiceImpl implements StorageService {
                 for(File f:file.listFiles()) {
                     FileUtils.deleteDirectory(f);
                 }
+                file.delete();
                 logger.info("Deleted temporary folder and all it's content: {}", TEMPORARY_DIRECTORY);
             } catch (IOException e){
                 throw new StorageServiceException("An error ocurred during the temporary folder deletion");
