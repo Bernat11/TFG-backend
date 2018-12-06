@@ -5,10 +5,10 @@
         <classes>
             <class name="com.upf.etic.documentwithqr.DocumentWithQrApplicationTests" />
 
-            <!--<class name="com.upf.etic.documentwithqr.controller.DocumentWithQRcontrollerIT" />-->
+            <!--<class name="com.upf.etic.documentwithqr.controller.controllerIT.DocumentWithQRcontrollerIT" />-->
             <class name="com.upf.etic.documentwithqr.controller.DocumentWithQRcontrollerTest" />
             <class name="com.upf.etic.documentwithqr.controller.VersionControllerTest" />
-            <!--<class name="com.upf.etic.documentwithqr.controller.ViewsControllerIT" />-->
+            <!--<class name="com.upf.etic.documentwithqr.controller.controllerIT.ViewsControllerIT" />-->
             <class name="com.upf.etic.documentwithqr.controller.ViewsControllerTest" />
 
             <class name="com.upf.etic.documentwithqr.model.ImageDimensionTest" />

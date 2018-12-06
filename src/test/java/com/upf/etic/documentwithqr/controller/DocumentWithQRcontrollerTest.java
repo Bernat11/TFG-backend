@@ -20,18 +20,15 @@ import static org.mockito.Mockito.when;
 
 public class DocumentWithQRcontrollerTest {
 
-    private QRgeneratorService mockQRgeneratorService;
-    private DocumentWithQRcontroller documentWithQRcontroller;
-
     @Test
     public void encodeURLwithImageDimensionsInRequestSuccessTest() throws QRcodeGenerationException, MalformedURLException, StorageServiceException {
-        this.mockQRgeneratorService = mock(QRgeneratorService.class);
         //TODO: NO PUEDO MOCKEAR LA URL PORQUE ES FINAL
         URL mockUrl = new URL("http://www.google.es");
+        QRgeneratorService mockQRgeneratorService = mock(QRgeneratorService.class);
         ImageDimension mockImageDimension = mock(ImageDimension.class);
         ByteArrayResource mockByteArrayResource = mock(ByteArrayResource.class);
         when(mockQRgeneratorService.generateQRcode(mockUrl, mockImageDimension)).thenReturn(mockByteArrayResource);
-        this.documentWithQRcontroller = new DocumentWithQRcontroller(mockQRgeneratorService);
+        DocumentWithQRcontroller documentWithQRcontroller = new DocumentWithQRcontroller(mockQRgeneratorService);
         ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(mockUrl, mockImageDimension);
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         Assert.assertTrue(responseEntity.getHeaders().get(HttpHeaders.CONTENT_TYPE).contains(MediaType.IMAGE_PNG_VALUE));
@@ -39,14 +36,13 @@ public class DocumentWithQRcontrollerTest {
 
     @Test
     public void encodeURLwithImageDimensionsInRequestFailsTest() throws MalformedURLException, QRcodeGenerationException, StorageServiceException {
-        this.mockQRgeneratorService = mock(QRgeneratorService.class);
         //TODO: NO PUEDO MOCKEAR LA URL PORQUE ES FINAL
-        URL mockUrl = new URL("http://www.google.es");
+        URL url = new URL("http://www.google.es");
+        QRgeneratorService mockQRgeneratorService = mock(QRgeneratorService.class);
         ImageDimension mockImageDimension = mock(ImageDimension.class);
-        ByteArrayResource mockByteArrayResource = mock(ByteArrayResource.class);
-        when(mockQRgeneratorService.generateQRcode(mockUrl, mockImageDimension)).thenThrow(QRcodeGenerationException.class);
-        this.documentWithQRcontroller = new DocumentWithQRcontroller(mockQRgeneratorService);
-        ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(mockUrl, mockImageDimension);
+        when(mockQRgeneratorService.generateQRcode(url, mockImageDimension)).thenThrow(QRcodeGenerationException.class);
+        DocumentWithQRcontroller documentWithQRcontroller = new DocumentWithQRcontroller(mockQRgeneratorService);
+        ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(url, mockImageDimension);
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

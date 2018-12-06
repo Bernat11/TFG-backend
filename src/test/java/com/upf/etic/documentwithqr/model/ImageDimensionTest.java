@@ -9,14 +9,16 @@ import static com.upf.etic.documentwithqr.constants.ApplicationConstants.WIDTH;
 public class ImageDimensionTest {
     
     private ImageDimension imageDimension = new ImageDimension(WIDTH, HEIGHT);
-    
+
     @Test
-    public void getWidthTest(){
+    public void setWidthTest(){
+        imageDimension.setWidth(WIDTH);
         Assert.assertEquals(imageDimension.getWidth(), WIDTH);
     }
 
     @Test
-    public void getHeightTest(){
+    public void setHeightTest(){
+        imageDimension.setHeight(HEIGHT);
         Assert.assertEquals(imageDimension.getHeight(), HEIGHT);
     }
 }

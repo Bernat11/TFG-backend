@@ -1,4 +1,4 @@
-package com.upf.etic.documentwithqr.controller;
+package com.upf.etic.documentwithqr.controller.controllerIT;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
