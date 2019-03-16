@@ -1,21 +1,28 @@
 package com.upf.etic.documentwithqr.controller;
 
 import com.upf.etic.documentwithqr.model.Version;
-import com.upf.etic.documentwithqr.service.impl.VersionServiceImpl;
+import com.upf.etic.documentwithqr.service.VersionService;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class VersionControllerTest {
+@SpringBootTest
+@WebAppConfiguration
+public class VersionControllerTest extends AbstractTestNGSpringContextTests {
 
-    VersionServiceImpl mockVersionServiceImpl = Mockito.mock(VersionServiceImpl.class);
-    VersionController versionController = new VersionController(mockVersionServiceImpl);
+    @Autowired
+    private VersionController versionController;
 
     @Test
-    public void getVersionTest() {
+    public void getVersion(){
+        VersionService versionServiceMock = Mockito.mock(VersionService.class);
         Version mockVersion = Mockito.mock(Version.class);
-        Mockito.when(mockVersionServiceImpl.getVersion()).thenReturn(mockVersion);
-        Assert.assertNotNull(versionController.getVersion());
+        Mockito.when(versionServiceMock.getVersion()).thenReturn(mockVersion);
+        versionController = new VersionController(versionServiceMock);
     }
 
 }

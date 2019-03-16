@@ -7,25 +7,25 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-import static com.upf.etic.documentwithqr.constants.ApplicationConstants.TEMPORARY_DIRECTORY;
+import static com.upf.etic.documentwithqr.constants.ApplicationConstants.TEMPORARY_DIRECTORY_IMAGES;
 
 public class StorageServiceImplTest {
 
     StorageService storageService = new StorageServiceImpl();
-    File temporaryDirectoryFile = new File(TEMPORARY_DIRECTORY);
+    File temporaryDirectoryFile = new File(TEMPORARY_DIRECTORY_IMAGES);
 
     @Test
     public void createTemporaryFolderSuccess() throws StorageServiceException {
         if(temporaryDirectoryFile.exists()) {
-            storageService.deleteTemporaryFolderIfExists();
+            storageService.deleteTemporaryFolderIfExists(TEMPORARY_DIRECTORY_IMAGES);
         }
-        storageService.createTemporaryFolderIfNotExists();
+        storageService.createTemporaryFolderIfNotExists(TEMPORARY_DIRECTORY_IMAGES);
         Assert.assertTrue(temporaryDirectoryFile.exists());
     }
 
     @Test
     public void deleteTemporaryFolderSuccess() throws StorageServiceException {
-        storageService.createTemporaryFolderIfNotExists();
+        storageService.createTemporaryFolderIfNotExists(TEMPORARY_DIRECTORY_IMAGES);
         Assert.assertTrue(temporaryDirectoryFile.exists());
     }
 

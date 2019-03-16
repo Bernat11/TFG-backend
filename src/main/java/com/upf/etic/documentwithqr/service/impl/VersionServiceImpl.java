@@ -10,7 +10,8 @@ public class VersionServiceImpl implements VersionService {
 
     private Version version;
 
-    public VersionServiceImpl(@Autowired Version version){
+    @Autowired
+    public VersionServiceImpl(Version version){
         this.version = version;
     }
 

@@ -4,22 +4,27 @@ import com.upf.etic.documentwithqr.model.Version;
 import com.upf.etic.documentwithqr.service.VersionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class VersionController {
 
     private VersionService versionService;
-    Logger logger = LoggerFactory.getLogger(VersionController.class);
 
+    @Autowired
     public VersionController(VersionService versionService){
-        this.versionService = versionService;
+        this.versionService  = versionService;
     }
 
-    @GetMapping(value = "/version", produces = "application/json")
+    private Logger logger = LoggerFactory.getLogger(VersionController.class);
+
+    @GetMapping(value = "/api/version", produces = "application/json")
     public Version getVersion(){
-        logger.info("Received rest call to /version");
+        logger.info("Received rest call to /version with 'GET' request method");
         return versionService.getVersion();
     }
 }

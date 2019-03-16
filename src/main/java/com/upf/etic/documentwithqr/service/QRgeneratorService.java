@@ -16,6 +16,6 @@ public interface QRgeneratorService {
      * @throws QRcodeGenerationException
      * @return Path the generated QR code location
      */
-    ByteArrayResource generateQRcode(URL url, ImageDimension imageDimension) throws QRcodeGenerationException, StorageServiceException;
+    ByteArrayResource generateQRcode(URL url, ImageDimension imageDimension, long id) throws QRcodeGenerationException, StorageServiceException;
 
 }

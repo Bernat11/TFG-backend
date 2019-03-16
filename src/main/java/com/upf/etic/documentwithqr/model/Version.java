@@ -6,15 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Version {
 
+    @Value("${build.version}")
     private String webAppVersion;
 
+    @Value("${QR.version}")
     private String qrVersion;
-
-    public Version (@Value("${build.version}") String webAppVersion,
-                    @Value("${QR.version}") String qrVersion){
-        this.webAppVersion = webAppVersion;
-        this.qrVersion = qrVersion;
-    }
 
     public String getWebAppVersion(){
         return webAppVersion;

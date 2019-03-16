@@ -1,20 +1,29 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="document-with-QR-test-suite" verbose="1" >
-    <test name="document-with-QR-test"   >
+    <test name="Integration tests">
         <classes>
-            <class name="com.upf.etic.documentwithqr.DocumentWithQrApplicationTests" />
-
-            <!--<class name="com.upf.etic.documentwithqr.controller.controllerIT.DocumentWithQRcontrollerIT" />-->
+            <!--CONTROLLER IT-->
+            <class name="com.upf.etic.documentwithqr.controller.controllerIT.MarkerControllerIT" />
+            <class name="com.upf.etic.documentwithqr.controller.controllerIT.DocumentWithQRcontrollerIT" />
+            <class name="com.upf.etic.documentwithqr.controller.controllerIT.VersionControllerIT" />
+        </classes>
+    </test>
+    <test name="Unit tests">
+        <classes>
+            <!--CONTROLLER TEST-->
             <class name="com.upf.etic.documentwithqr.controller.DocumentWithQRcontrollerTest" />
+            <class name="com.upf.etic.documentwithqr.controller.MarkerControllerTest" />
             <class name="com.upf.etic.documentwithqr.controller.VersionControllerTest" />
-            <!--<class name="com.upf.etic.documentwithqr.controller.controllerIT.ViewsControllerIT" />-->
-            <class name="com.upf.etic.documentwithqr.controller.ViewsControllerTest" />
-
+            <!--MODEL TEST-->
             <class name="com.upf.etic.documentwithqr.model.ImageDimensionTest" />
             <class name="com.upf.etic.documentwithqr.model.VersionTest" />
-
+            <!--SERVICE TEST-->
+            <class name="com.upf.etic.documentwithqr.service.QRgeneratorServiceImplTest" />
+            <class name="com.upf.etic.documentwithqr.service.StorageServiceImplTest" />
             <class name="com.upf.etic.documentwithqr.service.VersionServiceImplTest" />
+            <!--APP START TEST-->
+            <class name="com.upf.etic.documentwithqr.DocumentWithQrApplicationTest" />
         </classes>
     </test>
 </suite>
