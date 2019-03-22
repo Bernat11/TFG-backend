@@ -50,4 +50,10 @@ public class MarkerDaoImpl implements MarkerDao{
         markerDao.deleteAll();
     }
 
+    @Override
+    @Transactional
+    public long count(){
+        return markerDao.count();
+    }
+
 }

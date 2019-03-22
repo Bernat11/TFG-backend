@@ -97,6 +97,12 @@ public class MarkerController {
         this.markerDao.deleteAll();
     }
 
+    @GetMapping("/markers/count")
+    public long count(){
+        logger.info("Rest call received to /markers/count with 'GET' request method");
+        return this.markerDao.count();
+    }
+
     public String generateUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }

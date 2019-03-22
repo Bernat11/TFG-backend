@@ -16,4 +16,6 @@ public interface MarkerDao {
 
     void deleteAll();
 
+    long count();
+
 }
