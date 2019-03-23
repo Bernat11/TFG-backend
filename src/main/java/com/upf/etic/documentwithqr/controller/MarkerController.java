@@ -103,6 +103,12 @@ public class MarkerController {
         return this.markerDao.count();
     }
 
+    @GetMapping("/markers/find")
+    public List<Marker> findByType(@RequestParam String tipo){
+        logger.info("Rest call received to /markers/find/{} with 'GET' request method", tipo);
+        return this.markerDao.findByType(tipo);
+    }
+
     public String generateUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }

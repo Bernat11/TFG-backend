@@ -18,4 +18,6 @@ public interface MarkerDao {
 
     long count();
 
+    List<Marker> findByType(String tipo);
+
 }

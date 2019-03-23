@@ -56,4 +56,10 @@ public class MarkerDaoImpl implements MarkerDao{
         return markerDao.count();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Marker> findByType(String tipo) {
+        return markerDao.findByType(tipo);
+    }
+
 }
