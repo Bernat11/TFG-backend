@@ -34,7 +34,7 @@ public class Marker implements Serializable{
     private String imagePath;
 
     @Column(name = "creation_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
     public Long getId(){
