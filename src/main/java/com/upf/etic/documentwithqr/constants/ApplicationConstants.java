@@ -15,7 +15,10 @@ public class ApplicationConstants {
 
     public static final String FOLDER_SEPARATOR = File.separator;
 
-    public static final String TEMPORARY_DIRECTORY_IMAGES = System.getProperty("java.io.tmpdir") + "user_images"
+    public static final String TEMPORARY_DIRECTORY_IMAGES_NON_COMPRESSED = System.getProperty("java.io.tmpdir") + "user_images"
+            + FOLDER_SEPARATOR + "non_compressed" + FOLDER_SEPARATOR;
+
+    public static final String TEMPORARY_DIRECTORY_IMAGES_COMPRESSED = System.getProperty("java.io.tmpdir") + "user_images"
             + FOLDER_SEPARATOR;
 
     private ApplicationConstants() {

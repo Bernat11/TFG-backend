@@ -31,8 +31,8 @@ public class QRgeneratorServiceImpl implements QRgeneratorService {
 
     public ByteArrayResource generateQRcode(URL url, ImageDimension imageDimension, long id) throws QRcodeGenerationException, StorageServiceException {
         StorageService storageService = new StorageServiceImpl();
-        storageService.createTemporaryFolderIfNotExists(TEMPORARY_DIRECTORY_IMAGES);
-        String tmpdir = TEMPORARY_DIRECTORY_IMAGES + id + IMAGE_FORMAT_EXTENSION;
+        storageService.createTemporaryFolderIfNotExists(TEMPORARY_DIRECTORY_IMAGES_COMPRESSED);
+        String tmpdir = TEMPORARY_DIRECTORY_IMAGES_COMPRESSED + id + "_compressed.jpg";
         logger.info("QR destination directory set to: {}", tmpdir);
 
         try {

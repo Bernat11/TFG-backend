@@ -31,7 +31,7 @@ public class DocumentWithQRcontroller {
         this.generatorService = generatorService;
     }
 
-    @GetMapping(value = "/encodeurl", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/encodeurl", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity encodeURL(@RequestHeader(name = "url") URL url,
                                     @RequestHeader(name = "width", required = false) int width,
                                     @RequestHeader(name = "height", required = false) int height,
