@@ -1,8 +1,8 @@
 package com.upf.etic.documentwithqr.util;
 
-import com.upf.etic.documentwithqr.exceptions.JSONReaderException;
-import com.upf.etic.documentwithqr.exceptions.QRcodeGenerationException;
-import com.upf.etic.documentwithqr.exceptions.StorageServiceException;
+import com.upf.etic.documentwithqr.error.exception.JSONReaderException;
+import com.upf.etic.documentwithqr.error.exception.QRcodeGenerationException;
+import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import com.upf.etic.documentwithqr.model.ImageDimension;
 import com.upf.etic.documentwithqr.service.QRgeneratorService;
 import com.upf.etic.documentwithqr.service.impl.QRgeneratorServiceImpl;
@@ -88,9 +88,17 @@ public class Utils {
                     then().
                     statusCode(201);
             QRgeneratorService qRgeneratorService = new QRgeneratorServiceImpl();
-            qRgeneratorService.generateQRcode(new URL("http://example.com"), new ImageDimension(300,300), i);
+            qRgeneratorService.generateQRcode("http://example.com", 300, 300, i);
             i++;
         }
 
+    }
+
+    public static String markerType2enum(String type){
+        if("Arte urbano".equalsIgnoreCase(type)){
+            return "ArteUrbano";
+        } else if("Otra localizacion".equalsIgnoreCase(type)){
+            return "OtraLocalizacion";
+        } return type;
     }
 }

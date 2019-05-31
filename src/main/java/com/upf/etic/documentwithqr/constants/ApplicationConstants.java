@@ -4,8 +4,10 @@ import java.io.File;
 
 public class ApplicationConstants {
 
-    public static final String APPLICATION_HOST = "http://192.168.1.36";
+    public static final String APPLICATION_HOST = "http://192.168.1.40";
+    public static final String APPLICATION_TEST_HOST = "http://192.168.1.40";
     public static final String APPLICATION_PORT = ":8070";
+    public static final String APPLICATION_PORT_TEST = ":8060";
 
     public static final int WIDTH = 350;
     public static final int HEIGHT = 350;

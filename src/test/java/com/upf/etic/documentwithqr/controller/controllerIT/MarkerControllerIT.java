@@ -1,26 +1,29 @@
 package com.upf.etic.documentwithqr.controller.controllerIT;
 
-import com.upf.etic.documentwithqr.exceptions.JSONReaderException;
+import com.upf.etic.documentwithqr.error.exception.JSONReaderException;
 import com.upf.etic.documentwithqr.util.Utils;
 import org.hamcrest.Matchers;
 import org.json.simple.JSONObject;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import java.io.File;
 
-import static com.upf.etic.documentwithqr.constants.ApplicationConstants.APPLICATION_HOST;
-import static com.upf.etic.documentwithqr.constants.ApplicationConstants.APPLICATION_PORT;
+import static com.upf.etic.documentwithqr.constants.ApplicationConstants.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.core.Is.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@TestPropertySource(locations="classpath:application-test.properties")
 public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
 
     public static String pathToResoruces = "src\\test\\resources\\markers";
+    private String host = APPLICATION_TEST_HOST;
+    private String port = APPLICATION_PORT_TEST;
 
     @DirtiesContext
     @Test
@@ -31,7 +34,7 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
                 multiPart("imagen", imagen).
                 multiPart("stringMarker", jsonObject.toJSONString()).
         when().
-                post(APPLICATION_HOST + APPLICATION_PORT + "/api/markers").
+                post(host + port + "/api/markers").
         then().
                 statusCode(201);
     }
@@ -41,7 +44,7 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
     public void getMarkerByIdSuccess() throws JSONReaderException {
         createMarker();
         when().
-                get(APPLICATION_HOST + APPLICATION_PORT + "/api/markers/1").
+                get(host + port + "/api/markers/1").
         then().
                 statusCode(200).
                 body("id", Matchers.is(1)).
@@ -56,7 +59,7 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
         createMarker2();
 
         when().
-                get(APPLICATION_HOST + APPLICATION_PORT + "/api/markers").
+                get(host + port + "/api/markers").
         then()
                 .statusCode(200).
                 body("titulo[0]", is("Grafiti dragon")).
@@ -71,14 +74,14 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
                 param("titulo", "edited").
                 param("descripcion", "edited").
         when().
-                put(APPLICATION_HOST + APPLICATION_PORT + "/api/markers/1").
+                put(host + port + "/api/markers/1").
         then().
                 statusCode(201).
                 body("titulo", is("edited")).
                 body("descripcion", is("edited"));
 
         when().
-                get(APPLICATION_HOST + APPLICATION_PORT + "/api/markers/1").
+                get(host + port + "/api/markers/1").
         then().
                 statusCode(200).
                 assertThat().body("id", Matchers.is(1)).
@@ -92,7 +95,7 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
     public void deleteMarkerByIdSuccess() throws JSONReaderException {
         createMarker();
         when().
-                delete(APPLICATION_HOST + APPLICATION_PORT + "/api/markers/1").
+                delete(host + port + "/api/markers/1").
         then().
                 statusCode(204);
     }
@@ -103,7 +106,7 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
         createMarker();
         createMarker2();
         when().
-                delete(APPLICATION_HOST + APPLICATION_PORT + "/api/markers").
+                delete(host + port + "/api/markers").
         then().
                 statusCode(204);
     }
@@ -115,7 +118,7 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
                 multiPart("imagen", imagen).
                 multiPart("stringMarker", jsonObject.toJSONString()).
         when().
-                post(APPLICATION_HOST + APPLICATION_PORT + "/api/markers").
+                post(host + port + "/api/markers").
         then().
                 statusCode(201);
     }

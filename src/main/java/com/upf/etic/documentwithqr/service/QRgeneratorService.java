@@ -1,7 +1,7 @@
 package com.upf.etic.documentwithqr.service;
 
-import com.upf.etic.documentwithqr.exceptions.QRcodeGenerationException;
-import com.upf.etic.documentwithqr.exceptions.StorageServiceException;
+import com.upf.etic.documentwithqr.error.exception.QRcodeGenerationException;
+import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import com.upf.etic.documentwithqr.model.ImageDimension;
 import org.springframework.core.io.ByteArrayResource;
 
@@ -12,10 +12,11 @@ public interface QRgeneratorService {
     /**
      * Generate a QR code image with the desired input URL
      * @param url the input URL to encode in QR
-     * @param imageDimension the dimensions (width & height) of the output image
+     * @param width the first dimensions (width) of the QR image
+     * @param height the first dimensions (height) of the QR image
      * @throws QRcodeGenerationException
      * @return Path the generated QR code location
      */
-    ByteArrayResource generateQRcode(URL url, ImageDimension imageDimension, long id) throws QRcodeGenerationException, StorageServiceException;
+    ByteArrayResource generateQRcode(String url, Integer width, Integer height, long id) throws QRcodeGenerationException, StorageServiceException;
 
 }

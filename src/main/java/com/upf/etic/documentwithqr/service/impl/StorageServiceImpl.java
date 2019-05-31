@@ -1,6 +1,6 @@
 package com.upf.etic.documentwithqr.service.impl;
 
-import com.upf.etic.documentwithqr.exceptions.StorageServiceException;
+import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import com.upf.etic.documentwithqr.service.StorageService;
 import org.apache.maven.surefire.shade.org.apache.maven.shared.utils.io.FileUtils;
 import org.slf4j.Logger;

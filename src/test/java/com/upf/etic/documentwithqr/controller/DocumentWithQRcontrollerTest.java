@@ -1,7 +1,7 @@
 package com.upf.etic.documentwithqr.controller;
 
-import com.upf.etic.documentwithqr.exceptions.QRcodeGenerationException;
-import com.upf.etic.documentwithqr.exceptions.StorageServiceException;
+import com.upf.etic.documentwithqr.error.exception.QRcodeGenerationException;
+import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import com.upf.etic.documentwithqr.model.ImageDimension;
 import com.upf.etic.documentwithqr.service.QRgeneratorService;
 import com.upf.etic.documentwithqr.service.impl.QRgeneratorServiceImpl;
@@ -30,19 +30,22 @@ public class DocumentWithQRcontrollerTest extends AbstractTestNGSpringContextTes
     @Autowired
     private DocumentWithQRcontroller documentWithQRcontroller;
 
+    private String url = "http://www.google.es";
+
     @Test
-    public void encodeURLSuccessTest() throws QRcodeGenerationException, MalformedURLException, StorageServiceException {
-        ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(new URL("http://www.google.es"), 300, 300, "1000");
+    public void encodeURLSuccessTest() {
+        ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(url, 300, 300, "1000");
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         Assert.assertTrue(responseEntity.getHeaders().get(HttpHeaders.CONTENT_TYPE).contains(MediaType.IMAGE_PNG_VALUE));
     }
 
     @Test
-    public void encodeURLThrowsQRCodeGenerationExceptionTest() throws MalformedURLException, QRcodeGenerationException, StorageServiceException {
+    public void encodeURLThrowsQRCodeGenerationExceptionTest() throws QRcodeGenerationException, StorageServiceException {
         QRgeneratorService mockQRgeneratorService = mock(QRgeneratorServiceImpl.class);
-        when(mockQRgeneratorService.generateQRcode(any(URL.class), any(ImageDimension.class), any(Long.class))).thenThrow(new QRcodeGenerationException("An exception occurred"));
+        when(mockQRgeneratorService.generateQRcode(url, 300, 300, 1))
+                .thenThrow(new QRcodeGenerationException("An exception occurred"));
         DocumentWithQRcontroller documentWithQRcontroller = new DocumentWithQRcontroller(mockQRgeneratorService);
-        ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(new URL("http://www.google.es"), 300, 300, "1000");
+        ResponseEntity responseEntity = documentWithQRcontroller.encodeURL(url, 300, 300, "1");
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

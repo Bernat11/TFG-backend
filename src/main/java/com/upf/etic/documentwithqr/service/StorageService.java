@@ -1,6 +1,6 @@
 package com.upf.etic.documentwithqr.service;
 
-import com.upf.etic.documentwithqr.exceptions.StorageServiceException;
+import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

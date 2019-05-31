@@ -1,4 +1,4 @@
-package com.upf.etic.documentwithqr.exceptions;
+package com.upf.etic.documentwithqr.error.exception;
 
 public class QRcodeGenerationException extends Exception {
 
