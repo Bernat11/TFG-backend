@@ -2,6 +2,7 @@ package com.upf.etic.documentwithqr.service;
 
 import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import com.upf.etic.documentwithqr.service.impl.StorageServiceImpl;
+import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

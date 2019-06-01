@@ -1,6 +1,7 @@
 package com.upf.etic.documentwithqr.controller;
 
 import com.upf.etic.documentwithqr.dao.MarkerDao;
+import com.upf.etic.documentwithqr.error.exception.RepositoryException;
 import com.upf.etic.documentwithqr.service.StorageService;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,14 @@ public class MarkerControllerTest extends AbstractTestNGSpringContextTests {
         Mockito.when(storageService.getImage("UUID")).thenReturn("IMAGE".getBytes());
         MarkerController markerController = new MarkerController(markerDao, storageService);
         Assert.assertEquals(markerController.getImage("UUID").getStatusCode(), HttpStatus.OK);
+    }
+
+    @Test
+    public void countMarkersByTypeSuccess() throws RepositoryException {
+        MarkerDao markerDaoMock = Mockito.mock(MarkerDao.class);
+        Mockito.when(markerDaoMock.countByType("Monumento")).thenReturn(1);
+        MarkerController markerController = new MarkerController(markerDaoMock, storageService);
+        Assert.assertEquals(markerController.count("Monumento"),1);
     }
 
 }

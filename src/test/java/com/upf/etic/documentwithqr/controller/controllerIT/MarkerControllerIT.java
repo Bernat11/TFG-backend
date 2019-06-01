@@ -3,6 +3,7 @@ package com.upf.etic.documentwithqr.controller.controllerIT;
 import com.upf.etic.documentwithqr.error.exception.JSONReaderException;
 import com.upf.etic.documentwithqr.util.Utils;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.json.simple.JSONObject;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -15,6 +16,8 @@ import java.io.File;
 import static com.upf.etic.documentwithqr.constants.ApplicationConstants.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -109,6 +112,28 @@ public class MarkerControllerIT extends AbstractTestNGSpringContextTests {
                 delete(host + port + "/api/markers").
         then().
                 statusCode(204);
+    }
+
+    @DirtiesContext
+    @Test
+    public void countAllMarkers() throws JSONReaderException {
+        createMarker();
+        createMarker2();
+        when().
+                get(host + port + "/api/markers/count").
+        then()
+                .body(containsString("2"));
+    }
+
+    @DirtiesContext
+    @Test
+    public void findMarkersByType() throws JSONReaderException {
+        createMarker();
+        when().
+                get(host + port + "/api/markers/find?tipo=Arte urbano").
+        then()
+                .statusCode(200)
+                .body("titulo[0]", Matchers.is("Grafiti dragon"));
     }
 
     private void createMarker2() throws JSONReaderException {

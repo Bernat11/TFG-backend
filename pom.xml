@@ -49,6 +49,9 @@
 		<developer>Bernat Rivera Rodriguez</developer>
 		<nia>173341</nia>
 		<organization>UPF</organization>
+		<!--sonar code coverage exclusions-->
+		<sonar.exclusions>**/Utils.java, **/error/*.java, **/enums/*.java, **/DocumentWithQrApplication.java,
+			**/exception/*.java</sonar.exclusions>
 	</properties>
 
 	<dependencies>
@@ -236,6 +239,11 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<excludes>
+						<exclude>**/*util.*</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

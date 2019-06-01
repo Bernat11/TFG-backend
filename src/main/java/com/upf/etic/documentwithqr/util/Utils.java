@@ -101,4 +101,8 @@ public class Utils {
             return "OtraLocalizacion";
         } return type;
     }
+
+    public static String sanitizeLogs(Object userMessageToLog){
+        return userMessageToLog.toString().replaceAll("[\n|\r|\t]", "_");
+    }
 }
