@@ -3,7 +3,6 @@ package com.upf.etic.documentwithqr.controller.controllerIT;
 import com.upf.etic.documentwithqr.error.exception.JSONReaderException;
 import com.upf.etic.documentwithqr.util.Utils;
 import org.hamcrest.Matchers;
-import org.hamcrest.core.IsEqual;
 import org.json.simple.JSONObject;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -13,11 +12,11 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-import static com.upf.etic.documentwithqr.constants.ApplicationConstants.*;
+import static com.upf.etic.documentwithqr.constants.ApplicationConstants.APPLICATION_PORT_TEST;
+import static com.upf.etic.documentwithqr.constants.ApplicationConstants.APPLICATION_TEST_HOST;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

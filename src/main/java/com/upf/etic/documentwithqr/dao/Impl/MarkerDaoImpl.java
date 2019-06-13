@@ -8,13 +8,13 @@ import com.upf.etic.documentwithqr.model.enums.MarkerTypes;
 import com.upf.etic.documentwithqr.util.Utils;
 import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.transaction.TransactionScoped;
 import java.util.List;
 
-@Service
+@Repository
 public class MarkerDaoImpl implements MarkerDao{
 
     private ICrudRepository markerDao;

@@ -3,7 +3,6 @@ package com.upf.etic.documentwithqr.util;
 import com.upf.etic.documentwithqr.error.exception.JSONReaderException;
 import com.upf.etic.documentwithqr.error.exception.QRcodeGenerationException;
 import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
-import com.upf.etic.documentwithqr.model.ImageDimension;
 import com.upf.etic.documentwithqr.service.QRgeneratorService;
 import com.upf.etic.documentwithqr.service.impl.QRgeneratorServiceImpl;
 import org.json.simple.JSONObject;
@@ -14,7 +13,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 
 import static com.upf.etic.documentwithqr.constants.ApplicationConstants.APPLICATION_HOST;
@@ -43,7 +41,7 @@ public class Utils {
         HashMap<String, String> imageMap = new HashMap();
 
         String[] markers = {"Arco", "Plata", "Camp", "Cascada", "Graffiti", "Palau", "Sagrada", "UPF", "La salle barceloneta",
-        "merlin", "Perruqueria Arman", "Pim pam burguer", "Restaurant del barri", "UPF ciutadella"};
+        "Merlin", "Perruqueria Arman", "Pim pam burguer", "Restaurant del barri", "UPF ciutadella"};
 
         jsonMap.put("Arco", pathToResoruces + "\\create\\Arco de triumfo\\arco_triumfo.json");
         jsonMap.put("Plata", pathToResoruces + "\\create\\Bar la Plata\\bar la plata.json");
@@ -54,7 +52,7 @@ public class Utils {
         jsonMap.put("Sagrada", pathToResoruces + "\\create\\Sagrada familia\\sagrada_familia.json");
         jsonMap.put("UPF", pathToResoruces + "\\create\\UPF Guttenberg\\Guttenberg_upf.json");
         jsonMap.put("La salle barceloneta", pathToResoruces + "\\create\\La salle barceloneta\\salle.json");
-        jsonMap.put("merlin", pathToResoruces + "\\create\\merlin\\merlin.json");
+        jsonMap.put("Merlin", pathToResoruces + "\\create\\Merlin\\merlin.json");
         jsonMap.put("Perruqueria Arman", pathToResoruces + "\\create\\Perruqueria Arman\\arman.json");
         jsonMap.put("Pim pam burguer", pathToResoruces + "\\create\\Pim pam burguer\\pim.json");
         jsonMap.put("Restaurant del barri", pathToResoruces + "\\create\\Restaurant del barri\\restaurant.json");
@@ -70,7 +68,7 @@ public class Utils {
         imageMap.put("Sagrada", pathToResoruces + "\\create\\Sagrada familia\\sagrada_familia.jpg");
         imageMap.put("UPF", pathToResoruces + "\\create\\UPF Guttenberg\\upf.jpg");
         imageMap.put("La salle barceloneta", pathToResoruces + "\\create\\La salle barceloneta\\la salle barceloneta.jpg");
-        imageMap.put("merlin", pathToResoruces + "\\create\\merlin\\Discoteca merlin.jpg");
+        imageMap.put("Merlin", pathToResoruces + "\\create\\Merlin\\Discoteca merlin.jpg");
         imageMap.put("Perruqueria Arman", pathToResoruces + "\\create\\Perruqueria Arman\\perruqueria arman.jpg");
         imageMap.put("Pim pam burguer", pathToResoruces + "\\create\\Pim pam burguer\\pim pam burguer.jpg");
         imageMap.put("Restaurant del barri", pathToResoruces + "\\create\\Restaurant del barri\\restaurant del barri.jpg");

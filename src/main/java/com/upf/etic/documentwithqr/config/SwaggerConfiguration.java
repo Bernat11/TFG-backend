@@ -24,7 +24,8 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.upf.etic.documentwithqr.controller"))
+                .apis(RequestHandlerSelectors.
+                        basePackage("com.upf.etic.documentwithqr.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
@@ -34,9 +35,11 @@ public class SwaggerConfiguration {
         return new ApiInfo(
                 "Documenta con QR REST API",
                 "Bernat Rivera TFG - Documentacion REST API.",
-                webAppVersion,
-                "Terms of service",
-                new Contact("Bernat Rivera", "https://www.upf.edu/es/web/etic","bernat.rivera01@estudiant.upf.edu"),
-                "License of API", "API license URL", Collections.emptyList());
+                webAppVersion,"Terms of service",
+                new Contact("Bernat Rivera",
+                        "https://www.upf.edu/es/web/etic",
+                        "bernat.rivera01@estudiant.upf.edu"),
+                "License of API",
+                "API license URL", Collections.emptyList());
     }
 }

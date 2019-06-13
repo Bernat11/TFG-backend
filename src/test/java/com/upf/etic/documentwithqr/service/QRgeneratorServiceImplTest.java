@@ -28,18 +28,22 @@ public class QRgeneratorServiceImplTest {
     }
 
     @Test
-    public void generateQRcodeSuccess() throws MalformedURLException, QRcodeGenerationException, StorageServiceException {
+    public void generateQRcodeSuccess() throws MalformedURLException,
+            QRcodeGenerationException, StorageServiceException {
         init();
         String url = "http://www.google.es";
-        ByteArrayResource byteArrayResource = qRgeneratorService.generateQRcode(url, 300, 300, 1000);
+        ByteArrayResource byteArrayResource = qRgeneratorService.generateQRcode(url,
+                300, 300, 1000);
         Assert.assertNotNull(byteArrayResource);
     }
 
     @Test(enabled = false)
-    public void generateQRthrowsQRcodeGenerationException() throws MalformedURLException, QRcodeGenerationException, StorageServiceException, WriterException {
+    public void generateQRthrowsQRcodeGenerationException() throws MalformedURLException,
+            QRcodeGenerationException, StorageServiceException, WriterException {
         init();
         QRCodeWriter mockQrCodeWriter = mock(QRCodeWriter.class);
-        when(mockQrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 300, 300)).thenThrow(new WriterException());
+        when(mockQrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 300, 300))
+                .thenThrow(new WriterException());
         qRgeneratorService.generateQRcode(url, 300, 300, 1000);
     }
 

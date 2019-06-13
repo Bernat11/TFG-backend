@@ -1,10 +1,10 @@
 package com.upf.etic.documentwithqr.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.upf.etic.documentwithqr.dao.MarkerDao;
 import com.upf.etic.documentwithqr.error.exception.RepositoryException;
 import com.upf.etic.documentwithqr.error.exception.StorageServiceException;
 import com.upf.etic.documentwithqr.model.entity.Marker;
+import com.upf.etic.documentwithqr.service.MarkerService;
 import com.upf.etic.documentwithqr.service.StorageService;
 import com.upf.etic.documentwithqr.util.Utils;
 import io.swagger.annotations.Api;
@@ -35,12 +35,12 @@ public class MarkerController {
 
     private Logger logger = LoggerFactory.getLogger(VersionController.class);
 
-    private MarkerDao markerDao;
+    private MarkerService markerService;
     private StorageService storageService;
 
     @Autowired
-    public MarkerController(MarkerDao markerDao, StorageService storageService){
-        this.markerDao = markerDao;
+    public MarkerController(MarkerService markerService, StorageService storageService){
+        this.markerService = markerService;
         this.storageService = storageService;
     }
 
@@ -52,9 +52,9 @@ public class MarkerController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @GetMapping("")
-    public List<Marker> index() {
+    public List<Marker> showAll() {
         logger.info("Rest call received to /markers with 'GET' request method");
-        return markerDao.findAll();
+        return markerService.findAll();
     }
 
     @ApiOperation(value = "Retrieve marker by id", response = Marker.class)
@@ -67,7 +67,7 @@ public class MarkerController {
     @GetMapping("/{id}")
     public Marker show(@PathVariable Long id) {
         logger.info("Rest call received to /markers/{} with 'GET' request method", Utils.sanitizeLogs(id));
-        return this.markerDao.findById(id);
+        return this.markerService.findById(id);
     }
 
     @ApiOperation(value = "Retrieve image by UUID", response = ResponseEntity.class)
@@ -102,7 +102,7 @@ public class MarkerController {
         storageService.storeMultiPartImage(imagen, UUID);
         marker.setImagePath(UUID);
         marker.setCreationDate(new Date());
-        this.markerDao.save(marker);
+        this.markerService.save(marker);
         return marker;
     }
 
@@ -117,10 +117,10 @@ public class MarkerController {
     @ResponseStatus(HttpStatus.CREATED)
     public Marker update(@RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion, @PathVariable Long id) {
         logger.info("Rest call received to /markers/{} with 'PUT' request method", Utils.sanitizeLogs(id));
-        Marker currentMarker = this.markerDao.findById(id);
+        Marker currentMarker = this.markerService.findById(id);
         currentMarker.setTitulo(titulo);
         currentMarker.setDescripcion(descripcion);
-        this.markerDao.save(currentMarker);
+        this.markerService.save(currentMarker);
         return currentMarker;
     }
 
@@ -135,8 +135,8 @@ public class MarkerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         logger.info("Rest call received to /markers/{} with 'DELETE' request method", Utils.sanitizeLogs(id));
-        Marker currentMarker = this.markerDao.findById(id);
-        this.markerDao.delete(currentMarker);
+        Marker currentMarker = this.markerService.findById(id);
+        this.markerService.delete(currentMarker);
     }
 
     @ApiOperation(value = "Delete all markers")
@@ -150,7 +150,7 @@ public class MarkerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMarkers() {
         logger.info("Rest call received to /markers with 'DELETE' request method");
-        this.markerDao.deleteAll();
+        this.markerService.deleteAll();
     }
 
     @ApiOperation(value = "Count all markers")
@@ -164,9 +164,9 @@ public class MarkerController {
     public long count(@RequestParam(required = false) String tipo) throws RepositoryException {
         logger.info("Rest call received to /markers/count with 'GET' request method");
         if(tipo != null && !"".equals(tipo)){
-            return this.markerDao.countByType(tipo);
+            return this.markerService.countByType(tipo);
         }
-        return this.markerDao.count();
+        return this.markerService.count();
     }
 
     @ApiOperation(value = "Find markers by type", response = List.class)
@@ -179,7 +179,7 @@ public class MarkerController {
     @GetMapping("/find")
     public List<Marker> findByType(@RequestParam String tipo) throws RepositoryException {
         logger.info("Rest call received to /markers/find/{} with 'GET' request method", Utils.sanitizeLogs(tipo));
-        return this.markerDao.findByType(tipo);
+        return this.markerService.findByType(tipo);
     }
 
     public String generateUUID() {
